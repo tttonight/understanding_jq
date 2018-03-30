@@ -1,103 +1,48 @@
+function App() {
 
-// 匿名函数的4种写法
-(function () {
-    console.log('I am a anonymous functions')
-})();
-
-
-!function () {
-    console.log('I am a anonymous functions 2')
-}();
-
-
-+ function () {
-    console.log('I am a anonymous functions 3')
-}();
-
-(function () { console.log('I am a anonymous functions 4') }())
-
-// js没有像c++那种的块级作用域
-function validate(x) {
-    if (x == 1) {
-        var name = 'right'
-    } else {
-        var name = 'wrong'
-    }
-    console.log(name) //right
 }
 
-validate(1)
+App.prototype.title = "app demo";
+App.prototype.getTitle = function () {
+    return this.title;
+}
+console.log(App.prototype);
 
-// create a block scope
-function validateBlock(x) {
 
-    (function () {
-        if (x == 1) {
-            var rs = 'right'
-        } else {
-            var rs = 'wrong'
-        }
-    })(); //匿名函数
-    console.log(typeof rs) //undefined
+
+var app1 = new App();
+var app2 = new App();
+console.log(app1.title);
+console.log(app2.title);
+console.log(app1.getTitle())
+console.log(app2.getTitle())
+
+
+//problem
+function Header(title) {
+    this.title = title;
+}
+App.prototype.header = new Header("header1");
+console.log(app1.header.title);
+console.log(app2.header.title);
+app1.header.title = 'header2';
+console.log(app1.header.title)
+console.log(app2.header.title)
+
+//solution
+//constructor & prototype
+function Header2(title) {
+    this.title = title;
 }
 
-validateBlock(1)
-
-
-
-//这是一种闭包，代码可以这样写
-var Header = (function () {
-    var _title = 'WIFI'
-    return {
-        init: function () {
-            console.log('<h1>' + _title + '</h1>')
-        },
-        getTitle: function () {
-            return _title;
-        },
-        setTitle: function (title) {
-            _title = title;
-        }
-    }
-})();
-
-Header.init();
-Header.setTitle('Demo');
-Header.init();
-
-
-
-
-
-
-
-function createFunctions() {
-    var result = new Array();
-    for (var i = 0; i < 10; i++) {
-        result[i] = function () {
-            return i;
-        };
-    }
-    return result;
+function App2() {
+    this.header = new Header2('app1')
 }
-var funcs = createFunctions();
-for (var i = 0; i < funcs.length; i++) {
-    console.log(funcs[i]());
-}
+var app1 = new App2()
+var app2 = new App2()
+console.log('App2:' + app1.header.title);
+console.log('App2:' + app2.header.title);
 
-//优化
-function createFunctions2() {
-    var result = new Array();
-    for (var i = 0; i < 10; i++) {
-        result[i] = (function (a) {
-            return function () {
-                return a
-            }
-        })(i);
-    }
-    return result;
-}
-var funcs = createFunctions2();
-for (var i = 0; i < funcs.length; i++) {
-    console.log(funcs[i]());
-}
+app1.header.title = 'app1  demo';
+console.log('App2:' + app1.header.title);
+console.log('App2:' + app2.header.title);

@@ -23,18 +23,18 @@ console.log(app1.getTitle())
 console.log(app2.getTitle())
 
 
-//problem
+// 出现问题：这里两个都new App(), 但是由于title是通过原型prototype添加的，所以里面的属性是共享的，这时候改变的是公共的title
 function Header(title) {
     this.title = title;
 }
 App.prototype.header = new Header("header1");
-console.log(app1.header.title);
-console.log(app2.header.title);
+console.log(app1.header.title); //-header1
+console.log(app2.header.title); //-header1
 app1.header.title = 'header2';//修改app1 header的属性会影响app2
-console.log(app1.header.title)
-console.log(app2.header.title)
+console.log(app1.header.title) //-header2
+console.log(app2.header.title) //-header2
 
-//solution
+//解决办法：
 //constructor & prototype
 function Header2(title) {
     this.title = title;
