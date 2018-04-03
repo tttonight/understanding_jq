@@ -6,32 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Understanding Jq</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
     <script src="jquery/dist/jquery.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="heatmap.js-master/build/heatmap.js">
+    </script>
+    <style type="text/css">
+        #main2 {
+            position: relative;
 
+            width: 900px;
+            height: 400px;
+            overflow: hidden;
+        }
+
+
+
+        .ih {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <h3>匿名函数写法</h3>
-    <pre>
-        
-        (function(){
-            console.log('I am a anonymous functions')
-        })();
+    <h2 id="main">jQuery</h2>
+    <button id="loginBtn" for="proxy test"> login</button>
+    <button id="testEvent">testEvent</button>
+    <!--  -->
+    <div id="main2"></div>
+    <!-- <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                ...
+            </div>
+        </div>
+    </div> -->
 
-
-
-        !function () {
-            console.log('I am a anonymous functions 2')
-        }();
-        
-        
-        + function () {
-            console.log('I am a anonymous functions 3')
-        }();
-
-
-        (function () { console.log('I am a anonymous functions 4') }())
-    </pre>
 </body>
 
 </html>
